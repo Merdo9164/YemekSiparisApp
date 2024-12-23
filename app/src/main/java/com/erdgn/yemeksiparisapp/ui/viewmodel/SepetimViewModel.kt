@@ -8,6 +8,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SepetimViewModel @javax.inject.Inject constructor(var yrepo:YemeklerRepository):ViewModel(){
+class SepetimViewModel :ViewModel(){
 
 }

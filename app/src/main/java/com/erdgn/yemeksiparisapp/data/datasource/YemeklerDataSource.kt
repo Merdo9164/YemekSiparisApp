@@ -11,7 +11,7 @@ class YemeklerDataSource (var collectionYemekler:CollectionReference){
     var yemeklerListesi = MutableLiveData<List<Yemekler>> ()
 
      fun yemekleriYükle(): MutableLiveData<List<Yemekler>>{
-        /* collectionYemekler.addSnapshotListener { value, error ->
+         collectionYemekler.addSnapshotListener { value, error ->
              if (value != null){
                  val liste = ArrayList<Yemekler>()
                  for(d in value.documents){
@@ -23,7 +23,7 @@ class YemeklerDataSource (var collectionYemekler:CollectionReference){
                  }
                  yemeklerListesi.value = liste
              }
-         }*/
+         }
          return yemeklerListesi
     }
 
