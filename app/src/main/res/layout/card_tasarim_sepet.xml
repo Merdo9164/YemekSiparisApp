@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/sepetCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/sepetCardResim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/sepetCardYemekAd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="UrunAd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/sepetCardFiyat"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="151dp" />
+
+            <TextView
+                android:id="@+id/sepetCardSabit1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fiyat : "
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/sepetCardSabit2"
+                app:layout_constraintTop_toBottomOf="@+id/sepetCardYemekAd"
+                tools:layout_editor_absoluteX="151dp" />
+
+            <TextView
+                android:id="@+id/sepetCardSabit2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adet :"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sepetCardFiyat"
+                tools:layout_editor_absoluteX="151dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/sepetCardFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="32dp"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/delete" />
+
+            <TextView
+                android:id="@+id/sepetCardToplamFiyat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="24dp"
+                android:text="Toplam ₺"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/sepetCardFiyat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="32₺"
+                app:layout_constraintBottom_toTopOf="@+id/sepetCardAdet"
+                app:layout_constraintTop_toBottomOf="@+id/sepetCardYemekAd"
+                tools:layout_editor_absoluteX="211dp" />
+
+            <TextView
+                android:id="@+id/sepetCardAdet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sepetCardFiyat"
+                tools:layout_editor_absoluteX="220dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "836036201711",
+    "project_id": "egitim-87d3a",
+    "storage_bucket": "egitim-87d3a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836036201711:android:8b2d36bc795d5f5ec49f1a",
+        "android_client_info": {
+          "package_name": "com.erdgn.filmlerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDujCgYM-kuOleyEpgIK8pUmUsRN2SfDMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836036201711:android:c76f176bf7c03822c49f1a",
+        "android_client_info": {
+          "package_name": "com.erdgn.kisileruygulamasi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDujCgYM-kuOleyEpgIK8pUmUsRN2SfDMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836036201711:android:a75155e978faad50c49f1a",
+        "android_client_info": {
+          "package_name": "com.erdgn.yemeksiparisapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDujCgYM-kuOleyEpgIK8pUmUsRN2SfDMw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
