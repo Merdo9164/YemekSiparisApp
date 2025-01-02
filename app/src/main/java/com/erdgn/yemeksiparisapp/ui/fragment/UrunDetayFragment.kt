@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.erdgn.yemeksiparisapp.databinding.FragmentUrunDetayBinding
+import com.erdgn.yemeksiparisapp.ui.viewmodel.SepetimViewModel
 import com.erdgn.yemeksiparisapp.ui.viewmodel.SharedViewModel
 import com.erdgn.yemeksiparisapp.ui.viewmodel.UrunDetayViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +21,7 @@ class UrunDetayFragment : Fragment() {
     private lateinit var binding: FragmentUrunDetayBinding
     private lateinit var urunDetayViewModel: UrunDetayViewModel
     private val sharedViewModel: SharedViewModel by viewModels() // SharedViewModel'e bağlanıyoruz
+    private val sepetimViewModel: SepetimViewModel by viewModels ()
 
     @SuppressLint("DiscouragedApi")
     override fun onCreateView(
@@ -63,6 +66,24 @@ class UrunDetayFragment : Fragment() {
         }
 
         binding.textViewToplamFiyat.text = "${yemek.yemek_fiyat?.times(adet)} ₺"
+
+        // Sepete Ekle butonu
+        binding.buttonSepeteEkle.setOnClickListener {
+            sepetimViewModel.sepeteEkle(
+                yemek_adi = yemek.yemek_adi,
+                yemek_resim_adi = yemek.yemek_resim_adi,
+                yemek_fiyat = yemek.yemek_fiyat,
+                yemek_siparis_adet = adet,
+                kullanici_adi = "erdgn", // Kullanıcı adı dinamik hale getirilebilir
+                onSuccess = {
+                    Toast.makeText(requireContext(), "Ürün sepete eklendi!", Toast.LENGTH_SHORT).show()
+                },
+                onError = { error ->
+                    Toast.makeText(requireContext(), "Hata: $error", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
+
 
         return binding.root
     }
