@@ -75,4 +75,20 @@ class YemeklerDataSource(var collectionYemekler: CollectionReference) {
             }
         return sepetYemeklerListesi
     }
+    // Sepetten ürün silme
+     suspend fun sepetYemekleriSil(sepet_yemek_id: String): Result<Unit> {
+        return try {
+            // Firestore'dan ürünü sil
+            val db = FirebaseFirestore.getInstance()
+            val sepetCollection: CollectionReference = db.collection("sepet").document("urunler").collection("items")
+            sepetCollection.document(sepet_yemek_id).delete().await()
+
+            // Silme işlemi başarılı
+            Result.success(Unit)
+        } catch (e: Exception) {
+            // Silme işlemi sırasında hata
+            Result.failure(e)
+        }
+    }
+
 }

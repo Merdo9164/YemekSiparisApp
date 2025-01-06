@@ -6,18 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.erdgn.yemeksiparisapp.R
-import com.erdgn.yemeksiparisapp.data.entity.SepetYemekler
 import com.erdgn.yemeksiparisapp.databinding.FragmentSepetimBinding
 import com.erdgn.yemeksiparisapp.ui.adapter.SepetAdapter
 import com.erdgn.yemeksiparisapp.ui.viewmodel.SepetimViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
-
 
 
 @AndroidEntryPoint
@@ -27,7 +22,6 @@ class SepetimFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SepetimViewModel by viewModels()
-    private lateinit var adapter: SepetAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +38,7 @@ class SepetimFragment : Fragment() {
         binding.sepetimToolbarBaslik = "Sepetim"
 
         val kullaniciAdi = "erdgn" // Dinamik olarak alabilirsiniz.
+
         // RecyclerView setup
         val sepetadapter = SepetAdapter(requireContext(), listOf())
         binding.sepetRv.layoutManager = LinearLayoutManager(requireContext())
@@ -59,7 +54,6 @@ class SepetimFragment : Fragment() {
                 binding.sepetBosText.visibility = View.VISIBLE
             }
 
-
             val toplamFiyat = sepetYemekler.sumOf { it.yemek_fiyat!! * it.yemek_siparis_adet }
             binding.textViewSepetToplam.text = "$toplamFiyat ₺"
         }
@@ -71,6 +65,13 @@ class SepetimFragment : Fragment() {
             // Burada sepeti onaylama işlemleri yapılabilir.
             // Örnek: verileri sunucuya gönderme.
         }
+
+
+        //silme işlemini tetikliyor
+        sepetadapter.setsepetSil { sepetYemekler ->
+            viewModel.sepetYemekleriSil("${sepetYemekler.sepet_yemek_id}")
+        }
+
     }
 
     override fun onDestroyView() {

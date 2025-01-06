@@ -1,5 +1,6 @@
 package com.erdgn.yemeksiparisapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -54,5 +55,22 @@ class SepetimViewModel @Inject constructor(private val repository: YemeklerRepos
             sepetYemeklerListesi.value = sepetYemekler
         }
     }
+
+    // Sepetten yemek silme
+    fun sepetYemekleriSil(sepet_yemek_id: String) {
+        viewModelScope.launch {
+            try {
+                repository.sepetYemekleriSil(sepet_yemek_id)
+                // Başarılı silme işlemi
+                val yeniListe =
+                    sepetYemeklerListesi.value?.filter { it.sepet_yemek_id != sepet_yemek_id }
+                sepetYemeklerListesi.postValue(yeniListe!!)
+            } catch (e: Exception) {
+                // Hata durumunda loglama
+                Log.e("SepetimViewModel", "Silme işlemi başarısız: ${e.localizedMessage}")
+            }
+        }
+    }
+
 
 }

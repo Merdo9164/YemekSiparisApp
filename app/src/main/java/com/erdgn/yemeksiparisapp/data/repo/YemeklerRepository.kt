@@ -18,4 +18,8 @@ class YemeklerRepository(var yds: YemeklerDataSource) {
     fun sepetYemekleriYükle(kullanici_adi: String): MutableLiveData<List<SepetYemekler>> {
         return yds.sepetYemekleriYükle(kullanici_adi)
     }
+
+    suspend fun sepetYemekleriSil(sepet_yemek_id: String){
+        yds.sepetYemekleriSil(sepet_yemek_id)
+    }
 }
