@@ -1,5 +1,6 @@
 package com.erdgn.yemeksiparisapp.data.repo
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.erdgn.yemeksiparisapp.data.datasource.YemeklerDataSource
 import com.erdgn.yemeksiparisapp.data.entity.SepetYemekler

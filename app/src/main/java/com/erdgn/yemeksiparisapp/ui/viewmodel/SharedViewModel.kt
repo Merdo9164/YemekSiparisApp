@@ -1,5 +1,6 @@
 package com.erdgn.yemeksiparisapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,4 +30,5 @@ class SharedViewModel : ViewModel() {
         }
         _sepetUrunler.value = _sepetUrunler.value // Listeyi yeniden tetiklemek için
     }
+
 }

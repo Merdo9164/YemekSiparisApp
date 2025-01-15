@@ -14,22 +14,27 @@ import com.erdgn.yemeksiparisapp.databinding.FragmentAnasayfaBinding
 import com.erdgn.yemeksiparisapp.ui.fragment.AnasayfaFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 
-class YemeklerAdapter (var mContext: Context , var yemeklerListesi:List<Yemekler>)
-    :RecyclerView.Adapter<YemeklerAdapter.CardTasarimTutucu>(){
+class YemeklerAdapter(
+    var mContext: Context,
+    var yemeklerListesi: List<Yemekler>,
+    private val onSepeteEkle: (Yemekler) -> Unit // Lambda tanımlandı
+) : RecyclerView.Adapter<YemeklerAdapter.CardTasarimTutucu>() {
 
-    inner class CardTasarimTutucu (var tasarim:CardTasarimBinding) : RecyclerView.ViewHolder(tasarim.root)
+    inner class CardTasarimTutucu(var tasarim: CardTasarimBinding) :
+        RecyclerView.ViewHolder(tasarim.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardTasarimTutucu {
         val binding = CardTasarimBinding.inflate(LayoutInflater.from(mContext), parent, false)
         return CardTasarimTutucu(binding)
     }
+
     @SuppressLint("DiscouragedApi")
     override fun onBindViewHolder(holder: CardTasarimTutucu, position: Int) {
         val yemek = yemeklerListesi.get(position)
         val t = holder.tasarim
 
         val url = "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}"
-        Glide.with(mContext).load(url).override(500,750).into(t.imageViewAYemek)
+        Glide.with(mContext).load(url).override(500, 750).into(t.imageViewAYemek)
 
         t.textViewAYemekAd.text = "${yemek.yemek_adi}"
 
@@ -37,14 +42,15 @@ class YemeklerAdapter (var mContext: Context , var yemeklerListesi:List<Yemekler
 
 
         t.cardViewYemek.setOnClickListener {
-            val gecis =AnasayfaFragmentDirections.urunDetayGecis(yemek = yemek)
+            val gecis = AnasayfaFragmentDirections.urunDetayGecis(yemek = yemek)
             Navigation.findNavController(it).navigate(gecis)
 
         }
         t.buttonASepet.setOnClickListener {
-            Snackbar.make(it,"${yemek.yemek_adi} sepete eklendi",Snackbar.LENGTH_SHORT).show()
+            onSepeteEkle(yemek)
         }
     }
+
     override fun getItemCount(): Int {
         return yemeklerListesi.size
     }

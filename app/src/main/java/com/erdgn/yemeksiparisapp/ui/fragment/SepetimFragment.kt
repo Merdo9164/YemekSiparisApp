@@ -54,7 +54,7 @@ class SepetimFragment : Fragment() {
                 binding.sepetBosText.visibility = View.VISIBLE
             }
 
-            val toplamFiyat = sepetYemekler.sumOf { it.yemek_fiyat!! * it.yemek_siparis_adet }
+            val toplamFiyat = sepetYemekler.sumOf { it.yemek_fiyat!! * it.yemek_siparis_adet!! }
             binding.textViewSepetToplam.text = "$toplamFiyat ₺"
         }
 
@@ -62,10 +62,9 @@ class SepetimFragment : Fragment() {
 
         // Sepeti onayla butonu
         binding.buttonSepetiOnayla.setOnClickListener {
-            // Burada sepeti onaylama işlemleri yapılabilir.
+            // Burada sepeti onaylama işlemleri yapılacak
             // Örnek: verileri sunucuya gönderme.
         }
-
 
         //silme işlemini tetikliyor
         sepetadapter.setsepetSil { sepetYemekler ->

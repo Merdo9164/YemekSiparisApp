@@ -37,7 +37,7 @@ class SepetAdapter(
         t.sepetCardFiyat.text = "${sepetYemek.yemek_fiyat} ₺"
         t.sepetCardAdet.text = "${sepetYemek.yemek_siparis_adet}"
         t.sepetCardToplamFiyat.text =
-            "${sepetYemek.yemek_fiyat!! * sepetYemek.yemek_siparis_adet} ₺"
+            "${sepetYemek.yemek_fiyat!! * sepetYemek.yemek_siparis_adet!!} ₺"
 
         // Görsel yükleme (Opsiyonel)
         val url = "http://kasimadalan.pe.hu/yemekler/resimler/${sepetYemek.yemek_resim_adi}"
@@ -45,11 +45,8 @@ class SepetAdapter(
 
         t.sepetCardFab.setOnClickListener {
             sepetSil?.invoke(sepetYemek)
-
         }
-
     }
-
     override fun getItemCount(): Int = sepetListesi.size
 
     fun setSepetYemekler(sepetYemekler: List<SepetYemekler>) {
