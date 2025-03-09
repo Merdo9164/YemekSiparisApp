@@ -1,13 +1,76 @@
 package com.erdgn.yemeksiparisapp.ui.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.erdgn.yemeksiparisapp.data.entity.Yemekler
+import androidx.lifecycle.viewModelScope
+import com.erdgn.yemeksiparisapp.data.entity.SepetYemekler
 import com.erdgn.yemeksiparisapp.data.repo.YemeklerRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SepetimViewModel @javax.inject.Inject constructor(var yrepo:YemeklerRepository):ViewModel(){
+@HiltViewModel
+class SepetimViewModel @Inject constructor(private val repository: YemeklerRepository) :
+    ViewModel() {
+
+
+    // Sepete yemek ekleme
+    fun sepeteEkle(
+        yemek_adi: String?,
+        yemek_resim_adi: String?,
+        yemek_fiyat: Int?,
+        yemek_siparis_adet: Int,
+        kullanici_adi: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        viewModelScope.launch {
+            val sepetYemek = SepetYemekler(
+                yemek_adi = yemek_adi,
+                yemek_resim_adi = yemek_resim_adi,
+                yemek_fiyat = yemek_fiyat,
+                yemek_siparis_adet = yemek_siparis_adet,
+                kullanici_adi = kullanici_adi
+            )
+
+            // Sepet ekleme işlemi
+            val result = repository.sepeteEkle(sepetYemek)
+            if (result.isSuccess) {
+                onSuccess()
+            } else {
+                onError(result.exceptionOrNull()?.message ?: "Bilinmeyen bir hata oluştu.")
+            }
+        }
+    }
+
+    val sepetYemeklerListesi = MutableLiveData<List<SepetYemekler>>()
+
+
+    // Sepetteki ürünleri yükleme
+    fun sepetYemekleriYükle(kullaniciAdi: String) {
+        repository.sepetYemekleriYükle(kullaniciAdi).observeForever { sepetYemekler ->
+            sepetYemeklerListesi.value = sepetYemekler
+        }
+    }
+
+    // Sepetten yemek silme
+    fun sepetYemekleriSil(sepet_yemek_id: String) {
+        viewModelScope.launch {
+            try {
+                repository.sepetYemekleriSil(sepet_yemek_id)
+                // Başarılı silme işlemi
+                val yeniListe =
+                    sepetYemeklerListesi.value?.filter { it.sepet_yemek_id != sepet_yemek_id }
+                sepetYemeklerListesi.postValue(yeniListe!!)
+            } catch (e: Exception) {
+                // Hata durumunda loglama
+                Log.e("SepetimViewModel", "Silme işlemi başarısız: ${e.localizedMessage}")
+            }
+        }
+    }
+
 
 }

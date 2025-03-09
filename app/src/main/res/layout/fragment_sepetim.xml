@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="sepetimToolbarBaslik"
             type="String" />
+
+        <variable
+            name="sepetAdapter"
+            type="com.erdgn.yemeksiparisapp.ui.adapter.SepetAdapter" />
 
     </data>
 
@@ -17,7 +22,6 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarSepetim"
-            app:title="@{sepetimToolbarBaslik}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
@@ -26,7 +30,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{sepetimToolbarBaslik}" />
 
         <Button
             android:id="@+id/buttonSepetiOnayla"
@@ -66,17 +71,33 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sepetRv"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:spanCount="1"
-            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:adapter="@{sepetAdapter}"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/textViewSepetSabit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbarSepetim"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5"
+            app:spanCount="1" />
+
+        <TextView
+            android:id="@+id/sepetBosText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:text="Sepetiniz Boş"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

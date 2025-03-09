@@ -17,6 +17,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.AnasayfaFragment">
 
+        <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarAnasayfa"
             app:title="@{anasayfaToolbarBaslik}"
@@ -30,30 +31,55 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- RecyclerView for displaying items -->
+
+        <!-- FloatingActionButton (FAB) -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/yemeklerRv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adapter="@{yemeklerAdapter}"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/fab"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarAnasayfa"
+            app:layout_constraintVertical_bias="1.0"
+            app:spanCount="2" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:clickable="true"
             android:src="@drawable/ekle_sepet"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/yemeklerRv"
-            android:adapter="@{yemeklerAdapter}"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:spanCount="2"
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <!-- Badge (TextView) -->
+        <TextView
+            android:id="@+id/badge"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignTop="@id/fab"
+            android:layout_alignEnd="@id/fab"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="-4dp"
+            android:background="@drawable/badge_background"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/fab"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarAnasayfa"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

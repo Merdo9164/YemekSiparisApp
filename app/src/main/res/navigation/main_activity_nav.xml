@@ -29,6 +29,6 @@
     <fragment
         android:id="@+id/sepetimFragment"
         android:name="com.erdgn.yemeksiparisapp.ui.fragment.SepetimFragment"
-        android:label="fragment_sepetim"
+        android:label="Sepetim"
         tools:layout="@layout/fragment_sepetim" />
 </navigation>
